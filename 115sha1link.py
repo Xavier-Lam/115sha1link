@@ -31,8 +31,17 @@ def create_url(filename):
 
 
 def main():
-    url = create_url(sys.argv[1])
-    sys.stdout.write(url)
+    path = sys.argv[1]
+    if os.path.isdir(path):
+        filenames = [
+            os.path.join(path, filename)
+            for filename in os.listdir(path)
+        ]
+    else:
+        filenames = [path]
+    for filename in filenames:
+        url = create_url(filename)
+        print(url, end="\n")
 
 
 if "__main__" == __name__:
